@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title> O6U : Admin </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="assets/css/all.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="assets/css/main.css">
+        
+    </head>
+    <body>
+        <div class="wrapper">
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                <img src="assets/img/logo2.png" class="img-fluid">
+                    <strong style="font-size:20px;">O6U</strong>
+                </div>
+
+                <ul class="list-unstyled components">
+                    <li class="active">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-user-tie"></i>
+                             Professors 
+                        </a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a href="#"> All Professors </a>
+                            </li>
+                            <li>
+                                <a href="#"> Assign Subject </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#teachersubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            Teacher Assistants
+                        </a>
+                        <ul class="collapse list-unstyled" id="teachersubmenu">
+                            <li>
+                                <a href="#"> All Teacher Assistants </a>
+                            </li>
+                            <li>
+                                <a href="#"> Assign Subject </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#studentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-user-graduate"></i>
+                            Students 
+                        </a>
+                        <ul class="collapse list-unstyled" id="studentSubmenu">
+                            <li>
+                                <a href="#"> All Students </a>
+                            </li>
+                            <li>
+                                <a href="#"> Assign Student </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-copy"></i>
+                            Subjects
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Page Content  -->
+            <div id="content">
+                <nav>
+                    <div>
+                        <div class="title">
+                            <div class="row" style="margin:0;">
+                                <div class="col-md-5 my-2">
+                                    <button type="button" id="sidebarCollapse" class="btn stf">
+                                        <i class="fas fa-align-left"></i> Professors
+                                    </button>   
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </nav>
+                <div class="row search-bar">
+                    <div class="col-md-6 my-2">
+                        <input type="text" placeholder="Search ..." class="form-control">
+                    </div> 
+                    <div class="col-md-2 my-2">
+                        <button class="btn btn-info">Fliter</button>
+                    </div>
+                    <div class="col-md-4 my-2" style="text-align:right;">
+                        <button type="button" class="btn adding"> Add Professor </button>
+                    </div> 
+                </div>
+                
+                <div class="tb">
+                    <table class="table table-stuff table-responsive">
+                        <thead>
+                        <tr>
+                            <th style="width:140px;">User Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Subjects</th>
+                            <th style="width:300px;">Teacher Assistance</th>
+                            <th style="width:140px;">Created At</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>John</td>
+                            <td>john@example.com</td>
+                            <td>01111222345</td>
+                            <td>English</td>
+                            <td>Ahmed</td>
+                            <td>1-1-2020</td>
+                            <td><i class="far fa-edit mx-2"></i> <i class="far fa-trash-alt"></i></td>
+                        </tr>
+                        <tr>
+                            <td>John</td>
+                            <td>john@example.com</td>
+                            <td>01111222345</td>
+                            <td>English</td>
+                            <td>Ahmed</td>
+                            <td>1-1-2020</td>
+                            <td><i class="far fa-edit mx-2"></i> <i class="far fa-trash-alt"></i></td>
+                        </tr>
+                        <tr>
+                            <td>John</td>
+                            <td>john@example.com</td>
+                            <td>01111222345</td>
+                            <td>English</td>
+                            <td>Ahmed</td>
+                            <td>1-1-2020</td>
+                            <td><i class="far fa-edit mx-2"></i> <i class="far fa-trash-alt"></i></td>
+                        </tr>
+                        </tbody>
+                    </table> 
+                </div>
+                <nav aria-label="Page navigation example ">
+                        <ul class="pagination justify-content-center my-3">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+    <script type="text/javascript" src="assets/js/all.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+    </body>
+</html>
