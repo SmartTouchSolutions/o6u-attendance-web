@@ -26,7 +26,7 @@ class AttendanceController extends Controller
             if($validator->fails()) {
                 $response['success'] = false;
                 $response['error'] = 'Please Enter A valid Data';
-                return response()->json(['response' => $response], 200);
+                return response()->json($response, 200);
             }
 
             // Start Check If User Has This SubjectIDS
@@ -45,7 +45,7 @@ class AttendanceController extends Controller
 
                         $response['success'] = false;
                         $response['error'] = 'This Student Has Logged In This Lecture Before';
-                        return response()->json(['response' => $response], 200);
+                        return response()->json($response, 200);
 
 
                     } else {
@@ -65,8 +65,8 @@ class AttendanceController extends Controller
                         if($addCurrentPlusOne) {
 
                             $response['success'] = true;
-                            $response['message'] = 'Attendance has been successfully switched';
-                            return response()->json(['response' => $response], 200);
+                            $response['data'] = 'Attendance has been successfully switched';
+                            return response()->json($response, 200);
 
                         }
 
@@ -78,7 +78,7 @@ class AttendanceController extends Controller
                        'subject_user_id'        => $request->subject_user_id,
                        'student_id'             => $request->student_id,
                        'lectures_id'            => $request->lecture_id,
-                        'count_all_lectures'    => 1
+                       'count_all_lectures'     => 1
 
                     ]);
 
@@ -90,25 +90,25 @@ class AttendanceController extends Controller
 
                     if($startInsertNewStudentInAttendance && $addCurrentPlusOne) {
                         $response['success'] = true;
-                        $response['message'] = 'Attendance has been successfully switched';
-                        return response()->json(['response' => $response], 200);
+                        $response['data'] = 'Attendance has been successfully switched';
+                        return response()->json($response, 200);
                     } else {
                         $response['success'] = false;
                         $response['error'] = 'Please Try Again Later';
-                        return response()->json(['response' => $response], 200);
+                        return response()->json($response, 200);
                     }
                 }
             }  else {
             $response['success'] = false;
             $response['error'] = 'This Subject Does Not Belongs To This User Or This Student Is Not Belongs To This Subject';
-            return response()->json(['response' => $response], 200);
+            return response()->json($response, 200);
             }
 
         } else {
 
-            return response()->json([
-                'message' => 'Not a valid API Token',
-            ]);
+              $response['success'] = false;
+              $response['error'] = 'Not a valid API Token';
+              return response()->json($response, 200);
         }
 
     }
@@ -125,7 +125,7 @@ class AttendanceController extends Controller
             if($validator->fails()) {
                 $response['success'] = false;
                 $response['error'] = 'Please Enter A valid Data';
-                return response()->json(['response' => $response], 200);
+                return response()->json($response, 200);
             }
 
             // Start Check If User Has This SubjectIDS
@@ -149,30 +149,31 @@ class AttendanceController extends Controller
                     }
 
                     $response['success'] = true;
-                    $response['count_all_lectures_of_subject'] = $countOfLecturesOfThisSubject;
-                    $response['attendance'] = $getAttendanceOfThisSubject;
-                    $response['studentsWithNoAttendance'] = $getStudentsNamesWhoDidnotInAttendance;
-                    return response()->json(['response' => $response], 200);
+                    // $response['count_all_lectures_of_subject'] = $countOfLecturesOfThisSubject;
+                    // $response['attendance'] = $getAttendanceOfThisSubject;
+                    // $response['studentsWithNoAttendance'] = $getStudentsNamesWhoDidnotInAttendance;
+                    $response['data'] = ['count_all_lectures_of_subject' => $countOfLecturesOfThisSubject , 'attendance' > $getAttendanceOfThisSubject , 'studentsWithNoAttendance' => $getStudentsNamesWhoDidnotInAttendance]
+                    return response()->json($response, 200);
                 } else {
                     $response['success'] = false;
                     $response['error'] = 'This Subject Does Not Have Any Attendances Yet';
-                    return response()->json(['response' => $response], 200);
+                    return response()->json($response, 200);
                 }
 
 
             } else {
                     $response['success'] = false;
                     $response['error'] = 'This Subject Does Not Belongs To This User';
-                    return response()->json(['response' => $response], 200);
+                    return response()->json($response, 200);
             }
 
 
 
             } else {
 
-            return response()->json([
-                'message' => 'Not a valid API Token',
-            ]);
+              $response['success'] = false;
+              $response['error'] = 'Not a valid API Token';
+              return response()->json($response, 200);
         }
     }
 

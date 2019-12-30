@@ -21,7 +21,7 @@ class AuthController extends Controller
         if($validator->fails()) {
             $response['success'] = false;
             $response['error'] = 'Please Enter Username And Password';
-            return response()->json(['response' => $response], 200);
+            return response()->json($response, 200);
         }
 
         if(\Auth::attempt(['username' => request('username'), 'password' => request('password')])) {
@@ -37,14 +37,14 @@ class AuthController extends Controller
             $type = $user->type;
             $token = $api_token;
             $user = ['id' =>$userID , 'username' => $username , 'email' =>$email , 'type' =>$type , 'Authorization' => $token];
-            $response['success']              = true;
-            $response['userDetails'] 		  = $user;
-            return response()->json(['response' => $response], 200);
+            $response['success']    = true;
+            $response['data']       = $user;
+            return response()->json($response, 200);
 
         } else{
             $response['success'] = false;
             $response['error'] = 'Username or password is incorrect';
-            return response()->json(['response' => $response], 200);
+            return response()->json($response, 200);
         }
     }
 
@@ -58,19 +58,20 @@ class AuthController extends Controller
           if($logout) {
 
               $response['success'] = true;
-              $response['message'] = 'User Logged Out';
-              return response()->json(['response' => $response], 200);
+              $response['data'] = 'User Logged Out';
+              return response()->json($response, 200);
 
           } else {
               $response['success'] = false;
-              $response['message'] = 'Please Try Again Later';
-              return response()->json(['response' => $response], 200);
+              $response['error'] = 'Please Try Again Later';
+              return response()->json($response, 200);
 
           }
         } else {
-            return response()->json([
-                'message' => 'Not a valid API Token',
-            ]);
+            
+              $response['success'] = false;
+              $response['error'] = 'Not a valid API Token';
+              return response()->json($response, 200);
         }
       }
 
@@ -83,7 +84,7 @@ class AuthController extends Controller
           if($validator->fails()) {
               $response['success'] = false;
               $response['error'] = 'Please Enter Password';
-              return response()->json(['response' => $response], 200);
+              return response()->json($response, 200);
           }
 
           $token = $request->header('Authorization');
@@ -92,18 +93,18 @@ class AuthController extends Controller
               if(Hash::check($request->oldPassword, $user->password)){
                   $user->update(['password' => bcrypt($request->newPassword)]);
                   $response['success'] = true;
-                  $response['error'] = 'password updated';
-                  return response()->json(['response' => $response], 200);
+                  $response['data'] = 'password updated';
+                  return response()->json($response, 200);
               } else {
                   $response['success'] = false;
                   $response['error'] = 'password Is Not Correct';
-                  return response()->json(['response' => $response], 200);
+                  return response()->json($response, 200);
 
               }
           } else {
-              return response()->json([
-                  'message' => 'Not a valid API Token',
-              ]);
+              $response['success'] = false;
+              $response['error'] = 'Not a valid API Token';
+              return response()->json($response, 200);
           }
 
       }

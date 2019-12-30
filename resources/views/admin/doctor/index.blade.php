@@ -26,15 +26,19 @@
             </form>
 
         </div>
+
         <div class="col-md-4 my-2" style="text-align:right;">
             <a href="{{route('doctor.create')}}" class="btn adding"> Add Professor </a>
         </div>
     </div>
-
+        @if(session()->has('success'))
+            <p align="center" class="alert alert-success">{{session()->get('success')}}</p>
+        @endif
         <table class="tb table table-stuff table-responsive">
             <thead>
             <tr>
                 <th style="width:140px;">UserName</th>
+                <th style="width:140px;">Name</th>
                 <th>Email</th>
                 <th>Subjects</th>
                 <th style="width:140px;">Created At</th>
@@ -45,6 +49,7 @@
             @foreach($allDoctors as $doctor)
             <tr>
                 <td>{{$doctor->username}}</td>
+                <td>{{$doctor->name}}</td>
                 <td>{{$doctor->email}}</td>
                 @php
                     $getsubjectIDS = \DB::table('subject_users')->where('users_id' , 'LIKE' , '%'.$doctor->id.'%')->pluck('subject_id')->toArray();
@@ -53,7 +58,14 @@
                 @endphp
                 <td>{{$subjectsnameImplode}}</td>
                 <td>{{$doctor->created_at->toDateString()}}</td>
-                <td><i class="far fa-edit mx-2"></i> <i class="far fa-trash-alt"></i></td>
+                <td>
+                    <a href="{{route('doctor.edit' , $doctor->id)}}"><i class="far fa-edit mx-2"></i></a>
+                    <form action="{{route('doctor.destroy' , $doctor->id)}}" method="post">
+                        {{ csrf_field() }}
+                        @method('DELETE')
+                        <button type="submit"><i class="far fa-trash-alt"></i></button>
+                    </form>
+                </td>
             </tr>
             @endforeach
             </tbody>

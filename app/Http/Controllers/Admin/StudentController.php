@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 
 class StudentController extends Controller
 {
@@ -12,9 +14,15 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+        $allStudents = Student::when($request->search , function($que) use ($request) {
+            $que->where('username' , 'LIKE' , '%'.$request->search.'%');
+        })->select('id' , 'username' , 'student_code' , 'created_at')->paginate(3);
+
+        return view('admin.students.index' , ['allStudents' =>  $allStudents]);
+
     }
 
     /**

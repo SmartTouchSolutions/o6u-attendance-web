@@ -30,7 +30,7 @@
                 </a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
                     <li>
-                        <a href="#"> All Professors </a>
+                        <a href="{{url('/doctor')}}" class="active"> All Professors </a>
                     </li>
                     <li>
                         <a href="#"> Assign Subject </a>
@@ -44,7 +44,7 @@
                 </a>
                 <ul class="collapse list-unstyled" id="teachersubmenu">
                     <li>
-                        <a href="#"> All Teacher Assistants </a>
+                        <a href="{{url('/TeacherAssistant')}}"> All Teacher Assistants </a>
                     </li>
                     <li>
                         <a href="#"> Assign Subject </a>
@@ -58,7 +58,7 @@
                 </a>
                 <ul class="collapse list-unstyled" id="studentSubmenu">
                     <li>
-                        <a href="#"> All Students </a>
+                        <a href="student"> All Students </a>
                     </li>
                     <li>
                         <a href="#"> Assign Student </a>

@@ -31,7 +31,13 @@ Route::get('dashboard', 'Admin\DashboardController@dashboard')->name('index');
 // Start Doctor
 Route::resource('doctor', 'Admin\DoctorController');
 // End Doctor
+// Start teacher
+Route::resource('TeacherAssistant', 'Admin\TeacherAssistantController');
+// End teacher
 
+// Start Student
+Route::resource('student', 'Admin\StudentController');
+// End Student
 });
 
 Route::group(['middleware' => 'auth'], function() {

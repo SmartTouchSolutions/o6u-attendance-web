@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\Subject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -62,7 +63,11 @@ class DoctorController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $doctorDetails = User::find($id);
+        $doctorSubjects = \DB::table('subject_users')->where('users_id' , 'LIKE' , '%'.$id.'%')->pluck('subject_id')->toArray();
+        $allSubjects = Subject::get(['id','name']);
+        return view('admin.doctor.edit' , ['allSubjects' => $allSubjects , 'doctorDetails' => $doctorDetails , 'doctorSubjects' => $doctorSubjects]);
     }
 
     /**
@@ -74,7 +79,52 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = \Validator::make($request->all() , [
+
+            'username'              => 'required|unique:users,username,'.$id,
+            'email'                 => 'required|unique:users,email,'.$id,
+            'password'              => 'nullable',            
+            'subjects'              => 'required|array',
+
+
+        ])->validate();
+
+
+        $user = User::find($id);
+        $password = $request->password;
+        if($password == null) {
+            $password = $user->password;
+        } else {
+            $password = bcrypt($password);
+        }
+        $startUpdate = $user->update(['username' => $request->username , 'email' => $request->email , 'password' =>$password]);
+
+        $idsOfSubjectsOfDoctor = \DB::table('subject_users')->where('users_id' , 'LIKE' , '%'.$user->id.'%')->pluck('id')->toArray();
+        // Start Delete User From users ids
+        foreach($idsOfSubjectsOfDoctor as $subjectID) {
+            $getusersIDS = \DB::table('subject_users')->where('id' , $subjectID)->value('users_id');
+            $explodegetusersIDS = explode(',' , $getusersIDS);
+            $removeUserIDFromArray = array_filter($explodegetusersIDS , function($que) use ($user) {
+                return $que != intval($user->id);
+            });
+            $implodeArray = implode(',', $removeUserIDFromArray);
+
+            $startUpdate = \DB::table('subject_users')->where('id' , $subjectID)->update(['users_id' => $implodeArray]);
+        }
+
+        // Start Add User To Subject 
+
+        foreach($request->subjects as $subject) {
+            $theSubject = \DB::table('subject_users')->where('subject_id',$subject)->first();
+            $usersIDS = $theSubject->users_id.','.$user->id;
+            \DB::table('subject_users')->where('subject_id',$subject)->update(['users_id' => $usersIDS]);
+
+        }
+
+        \Session::flash('success' , 'Record Updated Success');
+        return redirect('doctor');
+        
+       
     }
 
     /**
@@ -85,6 +135,8 @@ class DoctorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::findOrFail($id)->delete();
+        \Session::flash('success' , 'Doctor Deleted Success');
+        return redirect('doctor');
     }
 }

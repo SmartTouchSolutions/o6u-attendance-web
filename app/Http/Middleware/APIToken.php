@@ -18,8 +18,10 @@ class APIToken
         if($request->header('Authorization')){
             return $next($request);
         }
-        return response()->json([
-            'message' => 'Not a valid API request.',
-        ]);
+
+            $response['success'] = false;
+            $response['error'] = 'Not a valid API Token';
+            return response()->json($response, 200);
+        
     }
 }
