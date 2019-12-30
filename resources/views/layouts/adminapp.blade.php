@@ -10,6 +10,7 @@
 {{--    <link rel="stylesheet" type="text/css" href="{{asset('/css/bootstrap.css')}}">--}}
     <link rel="stylesheet" type="text/css" href="{{asset('/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" media="screen" href="{{asset('/css/main.css')}}">
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
 
 </head>
 <body>
@@ -25,50 +26,60 @@
         </div>
 
         <ul class="list-unstyled components">
-            <li class="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            {{-- <li class="active"> --}}
+{{--                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <i class="fas fa-user-tie"></i>
                     Professors
                 </a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li>
-                        <a href="{{url('/doctor')}}" class="active"> All Professors </a>
+                <ul class="collapse list-unstyled" id="homeSubmenu"> --}}
+
+                    <li class=@if(Request::segment(1) == 'dashboard') {{'active'}} @endif>
+                        <a href="{{url('/dashboard')}}">
+                            <i class="fas fa-user-tie"></i> Dashboard
+                        </a>
                     </li>
-                    <li>
+                    <li class=@if(Request::segment(1) == 'doctor') {{'active'}} @endif>
+                        <a href="{{url('/doctor')}}">
+                            <i class="fas fa-user-tie"></i> Professors 
+                        </a>
+                    </li>
+                   {{--  <li>
                         <a href="#"> Assign Subject </a>
                     </li>
                 </ul>
-            </li>
-            <li>
-                <a href="#teachersubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            </li> --}}
+            <li class=@if(Request::segment(1) == 'TeacherAssistant') {{'active'}} @endif>
+                {{-- <a href="#teachersubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <i class="fas fa-chalkboard-teacher"></i>
                     Teacher Assistants
                 </a>
-                <ul class="collapse list-unstyled" id="teachersubmenu">
-                    <li>
-                        <a href="{{url('/TeacherAssistant')}}"> All Teacher Assistants </a>
-                    </li>
+                <ul class="collapse list-unstyled" id="teachersubmenu"> --}}
+                    {{-- <li> --}}
+                        <a href="{{url('/TeacherAssistant')}}"><i class="fas fa-chalkboard-teacher"></i> Teacher Assistants </a>
+                   {{--  </li>
                     <li>
                         <a href="#"> Assign Subject </a>
                     </li>
-                </ul>
+                </ul> --}}
             </li>
-            <li>
-                <a href="#studentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <li class=@if(Request::segment(1) == 'student') {{'active'}} @endif>
+                {{-- <a href="#studentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <i class="fas fa-user-graduate"></i>
                     Students
                 </a>
                 <ul class="collapse list-unstyled" id="studentSubmenu">
-                    <li>
-                        <a href="student"> All Students </a>
-                    </li>
+                    <li> --}}
+                        <a href="{{url('student')}}"> 
+                            <i class="fas fa-user-graduate"></i> Students 
+                        </a>
+                    {{-- </li>
                     <li>
                         <a href="#"> Assign Student </a>
                     </li>
-                </ul>
+                </ul> --}}
             </li>
-            <li>
-                <a href="subject">
+            <li class=@if(Request::segment(1) == 'subject') {{'active'}} @endif>
+                <a href="{{url('subject')}}">
                     <i class="fas fa-copy"></i>
                     Subjects
                 </a>
