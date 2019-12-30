@@ -13,7 +13,9 @@
 
 </head>
 <body>
+@if(! isset($noSidebar))
 <div class="wrapper">
+@endif    
     <!-- Sidebar  -->
     @if(! isset($noSidebar))
     <nav id="sidebar">
@@ -75,8 +77,9 @@
     </nav>
     @endif
     @yield('content')
-
+@if(! isset($noSidebar))    
 </div>
+@endif
 <script type="text/javascript" src="{{asset('/js/all.js')}}"></script>
 <script type="text/javascript" src="{{asset('/js/jquery.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('/js/bootstrap.min.js')}}"></script>
