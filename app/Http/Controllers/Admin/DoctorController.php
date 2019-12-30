@@ -19,7 +19,7 @@ class DoctorController extends Controller
     {
         $allDoctors = User::where('type' , 'doctor')->when($request->search , function($que) use ($request) {
             $que->where('username' , 'LIKE' , '%'.$request->search.'%');
-        })->select('id' , 'username' , 'email' , 'created_at')->paginate(1);
+        })->select('id','name' , 'username' , 'email' , 'created_at')->orderBy('id' , 'DESC')->paginate(3);
 
         return view('admin.doctor.index' , ['allDoctors' => $allDoctors]);
     }
@@ -45,14 +45,40 @@ class DoctorController extends Controller
     {
         $validator = \Validator::make($request->all() , [
 
-            'username'              => 'required|unique:users,username,'.$id,
+            'username'              => 'required|unique:users,username',
             'name'                  => 'required',
-            'email'                 => 'required|unique:users,email,'.$id,
+            'email'                 => 'required|email|unique:users,email',
             'password'              => 'nullable',            
             'subjects'              => 'required|array',
 
 
-        ])->validate();  
+        ])->validate();
+
+        $insertDoctor = User::create([
+            'username'  => $request->username,
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'type'      => 'doctor',
+            'password'  => $request->password
+        ]);
+
+        // Start Add User To Subject 
+        foreach($request->subjects as $subject) {
+            $theSubject = \DB::table('subject_users')->where('subject_id',$subject)->first();
+            if($theSubject) {
+                $usersIDS = $theSubject->users_id.','.$insertDoctor->id;
+                \DB::table('subject_users')->where('subject_id',$subject)->update(['users_id' => $usersIDS]);
+            } else {
+                Subject_User::create([
+                    'users_id' => $insertDoctor->id,
+                    'subject_id' => $subject
+
+                ]);
+            }
+        }
+        \Session::flash('success' , 'Record Created Success');
+        return redirect('doctor');
+
     }
 
     /**

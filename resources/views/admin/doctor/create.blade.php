@@ -36,7 +36,7 @@
                 <div class="col-md-12">
                     
                         <label class="mt-4 mr-2" for="inlineFormCustomSelectPref">Name</label><br>
-                        <input class="form-control" type="text" placeholder="Enter Name..">
+                        <input name="name" class="form-control" type="text" placeholder="Enter Name..">
                     
 				</div>
 				@if ($errors->has('name'))
