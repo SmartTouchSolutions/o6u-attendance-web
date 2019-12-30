@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Subject;
+use App\Subject_User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -143,8 +144,16 @@ class TeacherAssistantController extends Controller
         // Start Add User To Subject
         foreach($request->subjects as $subject) {
             $theSubject = \DB::table('subject_users')->where('subject_id',$subject)->first();
+            if($theSubject){
             $usersIDS = $theSubject->users_id.','.$user->id;
             \DB::table('subject_users')->where('subject_id',$subject)->update(['users_id' => $usersIDS]);
+
+                } else {
+                Subject_User::create([
+                    'users_id' => $user->id,
+                    'subject_id' => $subject
+                ]);
+            }
         }
         \Session::flash('success' , 'Record Updated Success');
         return redirect('TeacherAssistant');
