@@ -33,10 +33,11 @@ class AuthController extends Controller
             User::where('id' , $user->id)->update(['api_token' => $api_token]);
             $userID = $user->id;
             $username = $user->username;
+            $name = $user->name;
             $email = $user->email;
             $type = $user->type;
             $token = $api_token;
-            $user = ['id' =>$userID , 'username' => $username , 'email' =>$email , 'type' =>$type , 'Authorization' => $token];
+            $user = ['id' =>$userID,'name' => $name , 'username' => $username , 'email' =>$email , 'type' =>$type , 'Authorization' => $token];
             $response['success']    = true;
             $response['data']       = $user;
             return response()->json($response, 200);
