@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Student;
+use App\Subject;
+use App\Subject_Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -32,7 +34,9 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        $allStudents = Student::get(['id','username']);
+        $allSubjects = Subject::get(['id','name']);
+        return view('admin.students.create' ,['allStudents' =>  $allStudents , 'allSubjects' => $allSubjects]);
     }
 
     /**
@@ -43,7 +47,41 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = \Validator::make($request->all() ,[
+
+            'username'      => 'required',
+            'password'      => 'required|min:4',
+            'student_code'       => 'required',
+            'subjects'       => 'required |array'
+
+        ])->validate();
+
+        $insertData = new Student();
+        $insertData->username     = $request->username;
+        $insertData->password     = bcrypt($request->password);
+        $insertData->student_code     =$request->student_code;
+
+        $insertData->save();
+
+        foreach($request->subjects as $subject) {
+            $theSubjectUserID = \DB::table('subject_users')->where('subject_id',$subject)->first();
+            if($theSubjectUserID) {
+                // Start Insert theSubjectID With Student
+                Subject_Student::create([
+                    'subject_user_id' => $theSubjectUserID->id,
+                    'student_id' => $insertData->id
+                ]);
+            } else {
+                \Session::flash('error' , 'Please Add Doctor To Subjects');
+                return redirect('/student');
+            }
+
+
+//            $usersIDS = $theSubject->subject_id.($insertData->id);
+//            \DB::table('subject_students')->where('subject_id',$subject)->update(['subject_users_id' => $usersIDS]);
+        }
+
+        return redirect('/student');
     }
 
     /**
@@ -61,11 +99,15 @@ class StudentController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Respo$studentDetailsnse
      */
     public function edit($id)
     {
-        //
+        $studentDetails = Student::find($id);
+        $studentSubjects = \DB::table('subject_users')->where('users_id' , 'LIKE' , '%'.$id.'%')->pluck('subject_id')->toArray();
+        $allSubjects = Subject::get(['id','name']);
+        return view('admin.students.edit' , [ 'studentDetails' => $studentDetails , 'allSubjects' => $allSubjects , 'studentSubjects' => $studentSubjects]);
+
     }
 
     /**
@@ -77,7 +119,24 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = \Validator::make($request->all() , [
+            'username'              => 'required|unique:students,username,'.$id,
+            'password'              => 'nullable'
+        ])->validate();
+        $student = Student::find($id);
+        $password = $request->password;
+        if($password == null) {
+            $password =  $student->password;
+        } else {
+            $password = bcrypt($password);
+        }
+        $sudentUpdate =  $student->update(['username' => $request->username ,  'password' =>$password ]);
+
+
+        \Session::flash('success' , 'Record Updated Success');
+        return redirect('/student');
+
+
     }
 
     /**

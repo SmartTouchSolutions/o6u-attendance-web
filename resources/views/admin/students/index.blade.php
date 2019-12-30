@@ -60,7 +60,16 @@
                 @endphp
                 <td>{{$subjectsnameImplode}}</td>
                 <td>{{$student->created_at->toDateString()}}</td>
-                <td><i class="far fa-edit mx-2"></i> <i class="far fa-trash-alt"></i></td>
+                <td>
+                    <a href="{{route('student.edit',$student->id)}}"><i class="far fa-edit mx-2" style="padding-right: 5px;cursor: pointer;"> </i></a>
+                    <form action="{{route('student.destroy',$student->id)}}" method="post">
+                        {{csrf_field()}}
+                        @method('DELETE')
+                        <button type="submit">
+                            <i class="far fa-trash-alt" style="padding-right: 5px;cursor: pointer;"> </i>
+                        </button>
+                    </form>
+                </td>
             </tr>
         @endforeach
         </tbody>
