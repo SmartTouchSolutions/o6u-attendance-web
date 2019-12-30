@@ -30,7 +30,8 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        //
+        $allSubjects = Subject::get(['id','name']);
+        return view('admin.doctor.create' , ['allSubjects' => $allSubjects]);
     }
 
     /**

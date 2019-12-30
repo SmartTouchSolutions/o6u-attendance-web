@@ -47,9 +47,53 @@ span {
     display: inline-block;
 }
 
-/* ---------------------------------------------------
+/*=================================================
+Login Page 
+=================================================*/
+
+.logo-form-container2{
+    width: 100%;
+    min-height: 100vh;
+    background: url('../img/banner3.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo-form-container2::before{
+    content: '';
+  	position: absolute;
+  	top: 0;
+  	right: 0;
+  	bottom: 0;
+  	left: 0;
+  	background: #174992;
+	opacity: 0.6;
+}
+
+.logo-form2{
+    border: 2px solid #174992;
+    padding: 2% 3%;
+    border-radius: 5px;
+    width: 450px;
+    line-height: 25px;
+    background: #174992;
+}
+
+.inp2 label{
+    color: #fff;
+    font-weight: bold;
+}
+/* ----------------------------------------------
     SIDEBAR STYLE
------------------------------------------------------ */
+----------------------------------------------- */
 #sidebarCollapse svg:not(:root).svg-inline--fa{
     color: rgba(5,73,120,0.95);
     font-weight: bold;
@@ -204,6 +248,139 @@ a.article:hover {
     transition: all 0.3s;
 }
 
+/*================================
+Dashboard
+=================================*/
+/*------------- Blogs --------------------*/
+.our-prec{
+    padding: 10px;
+    margin: 0;
+}
+/*========-----first column------=======*/
+.prec1{
+   background: rgba(5, 92, 155, 0.95);
+   padding: 5px 8px;
+   border-radius: 5px;
+   color: #fff;
+   margin-right: 8px;
+}
+
+
+
+.blog{
+   padding: 8% 3%;
+   background: #eeeeee;
+   border-radius: 5px;
+   margin-bottom: 4%;
+}
+
+/*------- change color of text of prev period ---------*/
+.prev-period{
+   color: #6c757d;
+}
+
+/*-------- color of icon ---------*/
+.title-icon svg:not(:root).svg-inline--fa{
+   color: rgba(5, 92, 155, 0.95);
+   font-size: 30px;
+}
+
+.title-text{
+   font-size: 18px;
+   font-weight: bold;
+   color: #1e282c;
+}
+
+.sub{
+    margin-bottom: 0;
+    margin-left: 8px;
+    margin-top: 5px;
+}
+
+/*=================================
+Content of page 
+=================================*/
+.title2{
+    padding: 40px;
+    background: #f57f21;
+    color: #fff;
+}
+
+.title2 .stf{
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.adding{
+    height: 40px;
+    background-color: rgba(5,73,120,0.95);
+    border: 1px solid rgba(5,73,120,0.95);
+    width: 100%;
+    color: #fff;
+}
+
+.adding:hover{
+    background-color: rgba(3, 96, 163, 0.95);
+    border: 1px solid rgba(3, 96, 163, 0.95);
+    color: #fff;
+}
+
+.table-stuff{
+    width: 100%;
+    margin: auto;
+    margin-top: 25px;
+    background: #fff;
+    border-radius: 23px;
+    height: 350px;
+    overflow: scroll;
+}
+
+.search-bar{
+    width: 90%;
+    margin: auto;
+    margin-top: 15px;
+}
+
+.table thead th{
+    border-top: none;
+    border-bottom: none;
+}
+
+.table th, .table td{
+    padding: 20px;
+}
+
+.tb{
+    width: 90%;
+    margin: auto;
+    overflow: scroll;
+}
+
+/*==========================================
+Assign Page 
+=======================================*/
+.prof-sel label{
+    font-weight: bold;
+    font-size: 20px;
+    color: rgba(3, 96, 163, 0.95);
+}
+
+.title3{
+    padding: 20px;
+    background: #f57f21;
+    color: #fff;
+}
+
+.title3 .stf{
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.pagination{
+    margin: 15px 65px;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
@@ -257,64 +434,3 @@ a.article:hover {
     }
 }
 
-/*=================================
-Content of page 
-=================================*/
-.title{
-    padding: 40px;
-    background: #f57f21;
-    color: #fff;
-}
-
-.title .stf{
-    color: #fff;
-    font-weight: bold;
-    font-size: 24px;
-}
-
-.adding{
-    height: 40px;
-    background-color: rgba(5,73,120,0.95);
-    border: 1px solid rgba(5,73,120,0.95);
-    width: 100%;
-    color: #fff;
-}
-
-.adding:hover{
-    height: 40px;
-    background-color: rgba(3, 96, 163, 0.95);
-    border: 1px solid rgba(3, 96, 163, 0.95);
-    width: 200px;
-    color: #fff;
-}
-
-.table-stuff{
-    width: 100%;
-    margin: auto;
-    margin-top: 25px;
-    background: #fff;
-    border-radius: 23px;
-    height: 350px;
-    overflow: scroll;
-}
-
-.search-bar{
-    width: 90%;
-    margin: auto;
-    margin-top: 15px;
-}
-
-.table thead th{
-    border-top: none;
-    border-bottom: none;
-}
-
-.table th, .table td{
-    padding: 20px;
-}
-
-.tb{
-    width: 90%;
-    margin: auto;
-    overflow: scroll;
-}
