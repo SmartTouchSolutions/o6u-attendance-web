@@ -19,7 +19,7 @@ class AttendanceController extends Controller
 
             $validator = \Validator::make($request->all() , [
                 'subject_user_id' => 'required|exists:subject_users,id',
-                'student_id'      => 'required|exists:students,id',
+                'student_code'      => 'required|exists:students,student_code',
                 'lecture_id'      => 'required|exists:lectures,id'
             ]);
 
@@ -28,13 +28,14 @@ class AttendanceController extends Controller
                 $response['error'] = 'Please Enter A valid Data';
                 return response()->json($response, 200);
             }
+            $student_id = Student::where('student_code' , $request->student_code)->value('student_id');
 
             // Start Check If User Has This SubjectIDS
             $getUsersIDOfThisSubject = \DB::table('subject_users')->where('id' , $request->subject_user_id)->value('users_id');
             $getStudentsIDOfThisSubject = \DB::table('subject_students')->where('subject_user_id' , $request->subject_user_id)->pluck('student_id')->toArray();
-            if (strpos($getUsersIDOfThisSubject, $userID) !== false && in_array($request->student_id , $getStudentsIDOfThisSubject)) {
+            if (strpos($getUsersIDOfThisSubject, $userID) !== false && in_array($student_id , $getStudentsIDOfThisSubject)) {
                 // Check This Student Already Exists With This Subject Or Not
-                $getStudentAttendanceOfSubject = Attendance::where(['subject_user_id' => $request->subject_user_id , 'student_id' => $request->student_id])->first();
+                $getStudentAttendanceOfSubject = Attendance::where(['subject_user_id' => $request->subject_user_id , 'student_id' => $student_id])->first();
                 if($getStudentAttendanceOfSubject) {
                     // Check If $request->lecture_id Is Already Exists Means This Student Already Got His Attendance
                     $currentStudentLectures = $getStudentAttendanceOfSubject->lectures_id;
@@ -76,7 +77,7 @@ class AttendanceController extends Controller
                 } else {
                     $startInsertNewStudentInAttendance = Attendance::create([
                        'subject_user_id'        => $request->subject_user_id,
-                       'student_id'             => $request->student_id,
+                       'student_id'             => $student_id,
                        'lectures_id'            => $request->lecture_id,
                        'count_all_lectures'     => 1
 
@@ -166,7 +167,6 @@ class AttendanceController extends Controller
                     $response['error'] = 'This Subject Does Not Belongs To This User';
                     return response()->json($response, 200);
             }
-
 
 
             } else {

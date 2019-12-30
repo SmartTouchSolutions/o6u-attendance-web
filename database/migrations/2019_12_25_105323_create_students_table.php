@@ -17,7 +17,7 @@ class CreateStudentsTable extends Migration
             $table->mediumIncrements('id');
             $table->string('username')->unique();
             $table->string('password');
-            $table->mediumInteger('student_code')->unique(); // 16m
+            $table->integer('student_code')->unique(); // 16m
             $table->timestamps();
         });
     }

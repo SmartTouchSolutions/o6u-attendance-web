@@ -1,13 +1,7 @@
 @extends('layouts.adminapp')
 @section('content')
 @php $noSidebar=''; @endphp
-<!-- <form action="{{ route('doctor.store') }}" method="post"> -->
-	<!-- {{ csrf_field() }}
-	username:<input type="text" name="username">
-	email:<input type="email" name="email">
-	password:<input type="password" name="password">
-	re-password:<input type="password" name="password">
-</form> -->
+
 <div class="title3">
 	<div class="row" style="margin:0;">
 		<div class="col-md-5 my-2">

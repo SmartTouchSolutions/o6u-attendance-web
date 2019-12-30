@@ -32,7 +32,7 @@ class AuthController extends Controller
             }
         } else {
             \Session::flash('error', 'Username Or Password Is Invalid' );
-            return back();
+            return back()->withInput();
         }
 
         // session flash

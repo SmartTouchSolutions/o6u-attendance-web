@@ -22,13 +22,12 @@ class LectureController extends Controller
             if($validator->fails()) {
                 $response['success'] = false;
                 $response['error'] = 'Please Enter subject_user_id';
-                return response()->json(['response' => $response], 200);
+                return response()->json($response, 200);
             }
 
             // Start Check If User Has This SubjectIDS
             $getUsersIDOfThisSubject = \DB::table('subject_users')->where('id' , $request->subject_user_id)->value('users_id');
             if (strpos($getUsersIDOfThisSubject, $userID) !== false) {
-
 
                 // Check If Lecture Already Exists In This Day
                 $lastLectureOfThisSubject = Lecture::where('subject_user_id', $request->subject_user_id)->orderBy('id', 'DESC')->first();
@@ -40,8 +39,8 @@ class LectureController extends Controller
                     if ($lastLectureOfThisSubjectDate == $today) {
 
                         $response['success'] = false;
-                        $response['message'] = 'You Already Created lecture Today';
-                        return response()->json(['response' => $response], 200);
+                        $response['error'] = 'You Already Created lecture Today';
+                        return response()->json($response, 200);
 
                     } else {
                         // Start Create Lecture
@@ -53,12 +52,12 @@ class LectureController extends Controller
 
                         if ($createLecture) {
                             $response['success'] = true;
-                            $response['message'] = 'Lecture Created Success';
-                            return response()->json(['response' => $response], 200);
+                            $response['data'] = 'Lecture Created Success';
+                            return response()->json($response, 200);
                         } else {
                             $response['success'] = false;
-                            $response['message'] = 'Please Try Again Later';
-                            return response()->json(['response' => $response], 200);
+                            $response['error'] = 'Please Try Again Later';
+                            return response()->json($response, 200);
                         }
                     }
                 } else {
@@ -71,27 +70,27 @@ class LectureController extends Controller
 
                     if ($createLecture) {
                         $response['success'] = true;
-                        $response['message'] = 'Lecture Created Success';
-                        return response()->json(['response' => $response], 200);
+                        $response['data'] = 'Lecture Created Success';
+                        return response()->json($response, 200);
                     } else {
                         $response['success'] = false;
-                        $response['message'] = 'Please Try Again Later';
-                        return response()->json(['response' => $response], 200);
+                        $response['error'] = 'Please Try Again Later';
+                        return response()->json($response, 200);
                     }
 
                 }
 
             } else {
                 $response['success'] = false;
-                $response['message'] = 'This Subject Does Not Belongs To This User';
-                return response()->json(['response' => $response], 200);
+                $response['error'] = 'This Subject Does Not Belongs To This User';
+                return response()->json($response, 200);
             }//end if (strpos($getUsersIDOfThisSubject, $userID) !== false) {
 
         } else {
 
-            return response()->json([
-                'message' => 'Not a valid API Token',
-            ]);
+              $response['success'] = false;
+              $response['error'] = 'Not a valid API Token';
+              return response()->json($response, 200);
         }
     }
 
@@ -108,7 +107,7 @@ class LectureController extends Controller
             if($validator->fails()) {
                 $response['success'] = false;
                 $response['error'] = 'Please Enter subject_user_id';
-                return response()->json(['response' => $response], 200);
+                return response()->json($response, 200);
             }
             // Start Check If User Has This SubjectIDS
             $getUsersIDOfThisSubject = \DB::table('subject_users')->where('id' , $request->subject_user_id)->value('users_id');
@@ -119,26 +118,26 @@ class LectureController extends Controller
                 if(count($allLectures) > 0) {
                     $response['success'] = true;
                     $response['message'] = $allLectures;
-                    return response()->json(['response' => $response], 200);
+                    return response()->json($response, 200);
                 } else {
                     $response['success'] = false;
                     $response['error'] = 'This Subject Has Not Any Lectures Yet';
-                    return response()->json(['response' => $response], 200);
+                    return response()->json($response, 200);
                 }
 
             } else {
                 $response['success'] = false;
                 $response['error'] = 'This Subject Does Not Belongs To This User';
-                return response()->json(['response' => $response], 200);
+                return response()->json($response, 200);
             }
 
 
 
         } else {
 
-            return response()->json([
-                'message' => 'Not a valid API Token',
-            ]);
+              $response['success'] = false;
+              $response['error'] = 'Not a valid API Token';
+              return response()->json($response, 200);
         }
 
     }
