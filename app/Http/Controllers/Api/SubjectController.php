@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Subject;
 use App\User;
+use App\Subject_User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,33 +17,36 @@ class SubjectController extends Controller
         if($user) {
             // Start Get User Subjects
             $userID = strval($user->id);
-            $getUsers = \DB::table('subject_users')->select('users_id','subject_id')->get()->toArray();
+            // $getUsers = \DB::table('subject_users')->select('users_id','subject_id')->get()->toArray();
+            $allSubjectUser = Subject_User::where('users_id' , 'LIKE', '%' .$user->id. '%')->withCount('lectures')->with('subjects:id,name')->get();
+            
+            // dd($allSubjectUser);
 
-            $getSubjectsIDS = [];
-            foreach($getUsers as $user) {
-                $usersIDS = $user->users_id;
-                if (strpos($usersIDS, $userID) !== false) {
-                    $getSubjectsIDS[] = $user->subject_id;
-                }
-            }
+            // $getSubjectsIDS = [];
+            // foreach($getUsers as $user) {
+            //     $usersIDS = $user->users_id;
+            //     if (strpos($usersIDS, $userID) !== false) {
+            //         $getSubjectsIDS[] = $user->subject_id;
+            //     }
+            // }
 
-            // Start Get Subjects Name
-            if(count($getSubjectsIDS) > 0) {
-                $subjectName = Subject::whereIn('id' , $getSubjectsIDS)->pluck('name')->toArray();
+            // // Start Get Subjects Name
+            if(count($allSubjectUser) > 0) {
+            //     $subjectName = Subject::whereIn('id' , $getSubjectsIDS)->pluck('name')->toArray();
                 $response['success'] = true;
-                $response['message'] = $subjectName;
-                return response()->json(['response' => $response], 200);
+                $response['data'] = $allSubjectUser;
+                return response()->json($response, 200);
             } else {
                 $response['success'] = false;
                 $response['error'] = 'This User Has Not Any Subjects Yet';
-                return response()->json(['response' => $response], 200);
+                return response()->json($response, 200);
             }
 
         } else {
 
-            return response()->json([
-                'message' => 'Not a valid API Token',
-            ]);
+           $response['success'] = false;
+           $response['error'] = 'Not a valid API Token';
+           return response()->json($response, 200);
         }
     }
 }

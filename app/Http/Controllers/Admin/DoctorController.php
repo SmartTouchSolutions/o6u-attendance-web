@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use App\Subject;
+use App\Subject_User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -42,7 +43,16 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = \Validator::make($request->all() , [
+
+            'username'              => 'required|unique:users,username,'.$id,
+            'name'                  => 'required',
+            'email'                 => 'required|unique:users,email,'.$id,
+            'password'              => 'nullable',            
+            'subjects'              => 'required|array',
+
+
+        ])->validate();  
     }
 
     /**
@@ -83,6 +93,7 @@ class DoctorController extends Controller
         $validator = \Validator::make($request->all() , [
 
             'username'              => 'required|unique:users,username,'.$id,
+            'name'                  => 'required',
             'email'                 => 'required|unique:users,email,'.$id,
             'password'              => 'nullable',            
             'subjects'              => 'required|array',
@@ -98,7 +109,7 @@ class DoctorController extends Controller
         } else {
             $password = bcrypt($password);
         }
-        $startUpdate = $user->update(['username' => $request->username , 'email' => $request->email , 'password' =>$password]);
+        $startUpdate = $user->update(['username' => $request->username,'name' => $request->name , 'email' => $request->email , 'password' =>$password]);
 
         $idsOfSubjectsOfDoctor = \DB::table('subject_users')->where('users_id' , 'LIKE' , '%'.$user->id.'%')->pluck('id')->toArray();
         // Start Delete User From users ids
@@ -117,8 +128,17 @@ class DoctorController extends Controller
 
         foreach($request->subjects as $subject) {
             $theSubject = \DB::table('subject_users')->where('subject_id',$subject)->first();
-            $usersIDS = $theSubject->users_id.','.$user->id;
-            \DB::table('subject_users')->where('subject_id',$subject)->update(['users_id' => $usersIDS]);
+            if($theSubject) {
+                $usersIDS = $theSubject->users_id.','.$user->id;
+                \DB::table('subject_users')->where('subject_id',$subject)->update(['users_id' => $usersIDS]);
+            } else {
+                Subject_User::create([
+                    'users_id' => $user->id,
+                    'subject_id' => $subject
+
+                ]);
+            }
+
 
         }
 

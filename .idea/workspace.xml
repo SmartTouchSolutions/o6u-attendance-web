@@ -4,6 +4,7 @@
     <list default="true" id="e3a41647-a55f-407f-ba7e-03c6fc61ac1a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/TeacherAssistantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/TeacherAssistantController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Subject_User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Subject_User.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -145,7 +146,7 @@
       <workItem from="1577349044392" duration="8639000" />
       <workItem from="1577361809185" duration="4883000" />
       <workItem from="1577605861683" duration="18079000" />
-      <workItem from="1577705404505" duration="10535000" />
+      <workItem from="1577705404505" duration="10829000" />
     </task>
     <servers />
   </component>
