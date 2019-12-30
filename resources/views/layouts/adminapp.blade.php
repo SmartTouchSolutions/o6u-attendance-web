@@ -66,7 +66,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#">
+                <a href="subject">
                     <i class="fas fa-copy"></i>
                     Subjects
                 </a>

@@ -38,6 +38,10 @@ Route::resource('TeacherAssistant', 'Admin\TeacherAssistantController');
 // Start Student
 Route::resource('student', 'Admin\StudentController');
 // End Student
+
+// Start Student
+Route::resource('subject', 'Admin\SubjectController');
+// End Student
 });
 
 Route::group(['middleware' => 'auth'], function() {

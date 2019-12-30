@@ -161,6 +161,7 @@ class TeacherAssistantController extends Controller
     public function destroy($id)
     {
 
+
             User::findOrFail($id)->delete();
 
             return redirect('TeacherAssistant')->with('error' , 'teacher Deleted Success');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Subject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,9 +13,15 @@ class SubjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        {
+            $allsubject = Subject::when($request->search , function($que) use ($request) {
+                $que->where('name' , 'LIKE' , '%'.$request->search.'%');
+            })->select('id' , 'name' , 'subject_code' , 'created_at')->paginate(1);
+
+            return view('admin.subjects.index' , ['allsubject' => $allsubject]);
+        }
     }
 
     /**
@@ -24,7 +31,8 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.subjects.create');
+
     }
 
     /**
@@ -35,7 +43,22 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = \Validator::make($request->all() ,[
+
+            'name'              => 'required',
+            'subject_code'      => 'required',
+
+
+        ])->validate();
+
+        $insertData = new Subject();
+        $insertData->name               = $request->name;
+        $insertData->subject_code       = $request->subject_code;
+
+        $insertData->save();
+
+        return redirect('/subject');
+
     }
 
     /**
@@ -57,7 +80,11 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
-        //
+
+            $subjectDetails = Subject::find($id);
+
+        return view('admin.subjects.edit', compact('subjectDetails'));
+
     }
 
     /**
@@ -69,7 +96,16 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = \Validator::make($request->all() , [
+            'name'              => 'required|unique:subjects,name,'.$id,
+            'subject_code'              => 'required',
+        ])->validate();
+        $subject = Subject::find($id);
+
+        $startUpdate = $subject->update(['name' => $request->name , 'subject_code' => $request->subject_code]);
+
+        \Session::flash('success' , 'Record Updated Success');
+        return redirect('subject');
     }
 
     /**
@@ -80,6 +116,8 @@ class SubjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Subject::findOrFail($id)->delete();
+
+        return redirect('subject')->with('error' , 'subject Deleted Success');
     }
 }
