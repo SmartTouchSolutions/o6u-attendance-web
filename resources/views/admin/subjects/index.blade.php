@@ -53,13 +53,34 @@
                     <td>{{$subject->created_at->toDateString()}}</td>
                     <td>
                         <a href="{{route('subject.edit' , $subject->id)}}"><i class="far fa-edit mx-2"></i></a>
-                        <form action="{{route('subject.destroy' , $subject->id)}}" method="post">
-                            {{ csrf_field() }}
-                            @method('DELETE')
-                            <button type="submit"><i class="far fa-trash-alt"></i></button>
-                        </form>
+                        <i style="cursor:pointer;" data-toggle="modal" data-target="#exampleModal{{$subject->id}}" class="far fa-trash-alt"></i
+
                     </td>
                 </tr>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal{{$subject->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel" style="text-align:center;"> Alert ! </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure that you want to delete this ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <form action="{{route('subject.destroy' , $subject->id)}}" method="post">
+                                    {{ csrf_field() }}
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-primary">Delete </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endforeach
             </tbody>
         </table>

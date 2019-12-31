@@ -20,7 +20,7 @@ class TeacherAssistantController extends Controller
         {
             $allTeacherAssistants = User::where('type' , 'TeachingAssistant')->when($request->search , function($que) use ($request) {
                 $que->where('username' , 'LIKE' , '%'.$request->search.'%');
-            })->select('id' , 'username' , 'email' , 'created_at')->paginate(1);
+            })->select('id' , 'username' , 'email' , 'created_at')->orderBy('id','desc')->paginate(3);
 
             return view('admin.teacher.index' , ['allTeacherAssistants' => $allTeacherAssistants]);
         }
