@@ -5,7 +5,7 @@
 <div id="content">
     <nav>
         <div>
-            <div class="title">
+            <div class="title2">
                 <div class="row" style="margin:0;">
                     <div class="col-md-5 my-2">
                         <button type="button" id="sidebarCollapse" class="btn stf">

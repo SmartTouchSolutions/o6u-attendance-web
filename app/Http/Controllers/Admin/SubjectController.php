@@ -18,7 +18,7 @@ class SubjectController extends Controller
         {
             $allsubject = Subject::when($request->search , function($que) use ($request) {
                 $que->where('name' , 'LIKE' , '%'.$request->search.'%');
-            })->select('id' , 'name' , 'subject_code' , 'created_at')->paginate(1);
+            })->select('id' , 'name' , 'subject_code' , 'created_at')->orderBy('id','desc')->paginate(3);
 
             return view('admin.subjects.index' , ['allsubject' => $allsubject]);
         }
@@ -117,7 +117,7 @@ class SubjectController extends Controller
     public function destroy($id)
     {
         Subject::findOrFail($id)->delete();
-
+        \Session::flash('success' , 'Doctor Deleted Success');
         return redirect('subject')->with('error' , 'subject Deleted Success');
     }
 }

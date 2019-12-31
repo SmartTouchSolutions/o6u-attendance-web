@@ -5,7 +5,7 @@
         <div class="row" style="margin:0;">
             <div class="col-md-5 my-2">
                 <button type="button" id="sidebarCollapse" class="btn stf">
-                    <i class="fas fa-user-tie"></i> Edit Professor
+                    <i class="fas fa-user-tie"></i> Edit subject
                 </button>
             </div>
         </div>
@@ -45,40 +45,14 @@
                         <input class="form-control" type="text" placeholder="Enter Date..">
 
                 </div> -->
-            </div>
             <div class="row my-4" style="text-align:right;">
                 <div class="col-md-3">
                     <button class="btn adding">Submit</button>
                 </div>
             </div>
+
         </form>
     </div>
 
 
 @endsection
-
-
-
-
-
-
-
-
-
-{{--<form action="{{route('subject.update' , $subjectDetails->id)}}" method="post">--}}
-{{--    {{ csrf_field() }}--}}
-{{--    @method('PUT')--}}
-{{--    Name:<input type="text" name="name" value="{{$subjectDetails->name}}"><br>--}}
-{{--    @if ($errors->has('name'))--}}
-{{--        <p class="alert alert-danger">{{ $errors->first('name') }}</p>--}}
-{{--    @endif--}}
-{{--    Subject:<input type="text" name="subject_code" value="{{$subjectDetails->subject_code}}">--}}
-{{--    <br>--}}
-{{--    @if ($errors->has('subject_code'))--}}
-{{--        <p class="alert alert-danger">{{ $errors->first('subject_code') }}</p>--}}
-{{--    @endif--}}
-
-
-
-{{--    <input type="submit" name="Edit">--}}
-{{--</form>--}}
