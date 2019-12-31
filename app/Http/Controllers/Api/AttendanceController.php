@@ -153,7 +153,7 @@ class AttendanceController extends Controller
                     // $response['count_all_lectures_of_subject'] = $countOfLecturesOfThisSubject;
                     // $response['attendance'] = $getAttendanceOfThisSubject;
                     // $response['studentsWithNoAttendance'] = $getStudentsNamesWhoDidnotInAttendance;
-                    $response['data'] = ['count_all_lectures_of_subject' => $countOfLecturesOfThisSubject , 'attendance' > $getAttendanceOfThisSubject , 'studentsWithNoAttendance' => $getStudentsNamesWhoDidnotInAttendance]
+                    $response['data'] = ['count_all_lectures_of_subject' => $countOfLecturesOfThisSubject , 'attendance' => $getAttendanceOfThisSubject , 'studentsWithNoAttendance' => $getStudentsNamesWhoDidnotInAttendance];
                     return response()->json($response, 200);
                 } else {
                     $response['success'] = false;
@@ -167,6 +167,7 @@ class AttendanceController extends Controller
                     $response['error'] = 'This Subject Does Not Belongs To This User';
                     return response()->json($response, 200);
             }
+
 
 
             } else {
