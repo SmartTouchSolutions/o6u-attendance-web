@@ -21,7 +21,7 @@ class StudentController extends Controller
 
         $allStudents = Student::when($request->search , function($que) use ($request) {
             $que->where('username' , 'LIKE' , '%'.$request->search.'%');
-        })->select('id' , 'username' , 'student_code' , 'created_at')->paginate(3);
+        })->select('id' , 'username' , 'student_code' , 'created_at')->orderBy('id','desc')->paginate(3);
 
         return view('admin.students.index' , ['allStudents' =>  $allStudents]);
 
@@ -53,6 +53,7 @@ class StudentController extends Controller
             'password'      => 'required|min:4',
             'student_code'       => 'required',
             'subjects'       => 'required |array'
+
 
         ])->validate();
 
@@ -104,9 +105,13 @@ class StudentController extends Controller
     public function edit($id)
     {
         $studentDetails = Student::find($id);
-        $studentSubjects = \DB::table('subject_users')->where('users_id' , 'LIKE' , '%'.$id.'%')->pluck('subject_id')->toArray();
+        $studentSubjects = \DB::table('subject_students')->where('student_id',$studentDetails->id)->pluck('subject_user_id')->toArray();
+        $subject_user = \DB::table('subject_users')->whereIn('id',$studentSubjects)->pluck('subject_id')->toArray();
+        $allSubjectsOfStudent = Subject::whereIn('id',$subject_user)->pluck('id')->toArray();
         $allSubjects = Subject::get(['id','name']);
-        return view('admin.students.edit' , [ 'studentDetails' => $studentDetails , 'allSubjects' => $allSubjects , 'studentSubjects' => $studentSubjects]);
+//                dd($allSubjects);
+
+        return view('admin.students.edit' , [ 'studentDetails' => $studentDetails , 'allSubjectsOfStudent' => $allSubjectsOfStudent , 'allSubjects' => $allSubjects ]);
 
     }
 
@@ -121,7 +126,9 @@ class StudentController extends Controller
     {
         $validator = \Validator::make($request->all() , [
             'username'              => 'required|unique:students,username,'.$id,
-            'password'              => 'nullable'
+            'student_code'          => 'required|unique:students,student_code,'.$id,
+            'password'              => 'nullable',
+            'subjects'              => 'required |array'
         ])->validate();
         $student = Student::find($id);
         $password = $request->password;
@@ -130,7 +137,24 @@ class StudentController extends Controller
         } else {
             $password = bcrypt($password);
         }
-        $sudentUpdate =  $student->update(['username' => $request->username ,  'password' =>$password ]);
+        $sudentUpdate =  $student->update(['username' => $request->username , 'student_code' => $request->student_code, 'password' =>$password ]);
+
+        //start delete subject
+        \DB::table('subject_students')->where('student_id',$id)->delete();
+        //start insert new subjects to user
+        foreach($request->subjects as $subject) {
+            $theSubject = \DB::table('subject_users')->where('subject_id', $subject)->value('id');
+            if ($theSubject){
+                \DB::table('subject_students')->insert([
+                    'subject_user_id' =>$theSubject ,
+                    'student_id'      =>$id,
+
+                ]);
+            }else{
+                \Session::flash('error' , 'this subject does not have doctor yet ');
+                return redirect('/student');
+            }
+        }
 
 
         \Session::flash('success' , 'Record Updated Success');
@@ -147,6 +171,8 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Student::findOrFail($id)->delete();
+        \Session::flash('success' , 'student Deleted Success');
+        return redirect('student');
     }
 }

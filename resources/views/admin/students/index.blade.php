@@ -30,7 +30,12 @@
             <a href="{{route('student.create')}}" class="btn adding"> Add Student </a>
         </div>
     </div>
-
+    @if(session()->has('success'))
+        <p align="center" class="alert alert-success">{{session()->get('success')}}</p>
+    @endif
+    @if(session()->has('error'))
+        <p align="center" class="alert alert-danger">{{session()->get('error')}}</p>
+    @endif
     <table class="tb table table-stuff table-responsive">
         <thead>
         <tr>
@@ -62,15 +67,34 @@
                 <td>{{$student->created_at->toDateString()}}</td>
                 <td>
                     <a href="{{route('student.edit',$student->id)}}"><i class="far fa-edit mx-2" style="padding-right: 5px;cursor: pointer;"> </i></a>
-                    <form action="{{route('student.destroy',$student->id)}}" method="post">
-                        {{csrf_field()}}
-                        @method('DELETE')
-                        <button type="submit">
-                            <i class="far fa-trash-alt" style="padding-right: 5px;cursor: pointer;"> </i>
-                        </button>
-                    </form>
+                    <i style="cursor:pointer;" data-toggle="modal" data-target="#exampleModal{{$student->id}}" class="far fa-trash-alt"></i
                 </td>
             </tr>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal{{$student->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel" style="text-align:center;"> Alert ! </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure that you want to delete this ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <form action="{{route('student.destroy',$student->id)}}" method="post">
+                                {{csrf_field()}}
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-primary">Delete </button>
+                            </form>>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endforeach
         </tbody>
     </table>
@@ -78,4 +102,9 @@
         {!! $allStudents->appends(request()->query())->render("pagination::bootstrap-4") !!}
     @endif
 </div>
+
 @endsection
+
+
+
+
