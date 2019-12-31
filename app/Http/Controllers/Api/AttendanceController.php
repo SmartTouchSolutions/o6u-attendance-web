@@ -24,11 +24,18 @@ class AttendanceController extends Controller
             ]);
 
             if($validator->fails()) {
+                // return $validator->errors();
                 $response['success'] = false;
                 $response['error'] = 'Please Enter A valid Data';
                 return response()->json($response, 200);
             }
-            $student_id = Student::where('student_code' , $request->student_code)->value('student_id');
+            $student_id = Student::where('student_code' , $request->student_code)->value('id');
+            
+            if(! $student_id) {
+                $response['success'] = false;
+                $response['error'] = 'Invalid Student Code';
+                return response()->json($response, 200);
+            } 
 
             // Start Check If User Has This SubjectIDS
             $getUsersIDOfThisSubject = \DB::table('subject_users')->where('id' , $request->subject_user_id)->value('users_id');
