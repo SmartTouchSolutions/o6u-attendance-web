@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Student extends Model
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class Student extends Authenticatable
 {
+	use Notifiable;
     protected $guarded = [];
+    protected $table = 'students';
 
    public function Subjects()
     {

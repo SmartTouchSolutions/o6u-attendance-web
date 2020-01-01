@@ -35,8 +35,6 @@ class AuthController extends Controller
             return back()->withInput();
         }
 
-        // session flash
-
     }
 
     public function logout () {

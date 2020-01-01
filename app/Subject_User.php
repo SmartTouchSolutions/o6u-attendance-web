@@ -16,7 +16,7 @@ class Subject_User extends Model
 
     public function subjects() {
 
-        return $this->hasOne('App\Subject' , 'id');
+        return $this->belongsTo('App\Subject' , 'subject_id' , 'id');
     }
 
 }

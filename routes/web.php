@@ -16,16 +16,22 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'guest'], function() {
 Route::get('/', 'AuthController@loginGet')->name('login');
 Route::post('login_post', 'AuthController@loginPost')->name('loginPost');
+});
 
 // Student Login
-Route::get('/studentLogin', 'AuthStudentController@loginGet')->name('loginStudentGet');
-Route::post('/studentLogin_post', 'AuthStudentController@loginGet')->name('loginStudentPost');
+Route::group(['middleware' => 'guest:student'], function() {
+Route::get('studentLogin', 'AuthStudentController@loginGet')->name('loginStudentGet');
+Route::post('/studentLogin_post', 'AuthStudentController@loginPost')->name('loginStudentPost');
 });
-// Logout
-Route::get('logout', 'AuthController@logout')->name('logout');
+
+Route::group(['middleware' => 'studentPages'], function() {
+
+Route::get('student/attendance' , 'Student\AttendanceController@attendance');
+
+});
 
 
-Route::group(['middleware' => 'SuperAdmin'], function() {
+// Route::group(['middleware' => 'SuperAdmin'], function() {
 Route::get('dashboard', 'Admin\DashboardController@dashboard')->name('index');
 
 // Start Doctor
@@ -42,13 +48,24 @@ Route::resource('student', 'Admin\StudentController');
 // Start Student
 Route::resource('subject', 'Admin\SubjectController');
 // End Student
-});
+// });
 
-Route::group(['middleware' => 'auth'], function() {
+// Start SuperAdmin Logout
+Route::get('logout', 'AuthController@logout')->name('logout');
+// End  SuperAdmin Logout
 
-Route::get('/soon' , 'Admin\DashboardController@soon');
+// Start Student Logout
+Route::get('logoutStudent', 'AuthStudentController@logoutStudent')->name('logoutStudent');
+// End  Student Logout
 
-});
+// Route::group(['middleware' => 'auth'], function() {
+
+// Route::get('/soon' , 'Admin\DashboardController@soon');
+
+// });
+
+
+
 
 
 

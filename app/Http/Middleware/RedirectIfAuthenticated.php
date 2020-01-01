@@ -18,11 +18,16 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            if(Auth::user()->type == 'superAdmin') {
-                return redirect('/dashboard');
-            } else {
-                return redirect('/soon');
+            if($guard != 'student') {
+                if(Auth::user()->type == 'superAdmin') {
+                    return redirect('/dashboard');
+                } else {
+                    return redirect('/soon');
+                }  
+            } elseif($guard == 'student') {
+                return redirect('/student/attendance');
             }
+
 
         }
 
