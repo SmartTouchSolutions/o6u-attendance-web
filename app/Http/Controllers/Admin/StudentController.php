@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Attendance;
 use App\Student;
 use App\Subject;
 use App\Subject_Student;
@@ -93,7 +94,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -174,5 +175,30 @@ class StudentController extends Controller
         Student::findOrFail($id)->delete();
         \Session::flash('success' , 'student Deleted Success');
         return redirect('student');
+    }
+
+    public function showAttendance($id){
+        $studentSubjects = Subject_Student::where('student_id' , $id)->pluck('subject_user_id')->toArray();
+
+        $studentAttendance = [];
+        foreach($studentSubjects as $studentSubject) {
+
+            $studentAttendancett = Attendance::where('student_id' , $id)->where('subject_user_id' , $studentSubject)->with('studentAttendance')->with('subjectUserAttendance')->with('subjectUserAttendance.subjects')->first();
+            if($studentAttendancett) {
+                $studentAttendance[] = $studentAttendancett;
+            } else {
+
+            }
+
+        }
+
+        dd($studentAttendance);
+//        $student = Student::where('id' , $id)->with('Subjects.subject')->with('attendances.subjectUserAttendance')->first();
+        dd($student);
+        $student_id=$student->id;
+      //  return  view('welcome');
+
+       return  view('admin.students.attendance')
+            ->with('student_id', $student_id);
     }
 }

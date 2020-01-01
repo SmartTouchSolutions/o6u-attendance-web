@@ -37,11 +37,12 @@ Route::resource('TeacherAssistant', 'Admin\TeacherAssistantController');
 
 // Start Student
 Route::resource('student', 'Admin\StudentController');
+Route::get('admin/students/attendance/{id}', 'Admin\StudentController@showAttendance');
 // End Student
 
-// Start Student
+// Start subject
 Route::resource('subject', 'Admin\SubjectController');
-// End Student
+// End subject
 });
 
 Route::group(['middleware' => 'auth'], function() {
