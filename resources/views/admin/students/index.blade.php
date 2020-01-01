@@ -44,6 +44,7 @@
             <th>Subjects</th>
             <th style="width:140px;">Created At</th>
             <th>Action</th>
+            <th>Attendence</th>
 
         </tr>
         </thead>
@@ -69,6 +70,7 @@
                     <a href="{{route('student.edit',$student->id)}}"><i class="far fa-edit mx-2" style="padding-right: 5px;cursor: pointer;"> </i></a>
                     <i style="cursor:pointer;" data-toggle="modal" data-target="#exampleModal{{$student->id}}" class="far fa-trash-alt"></i
                 </td>
+                <td><a href={{url('admin/students/attendance/'.$student->id)}}>show attendence</a></td>
             </tr>
 
             <!-- Modal -->

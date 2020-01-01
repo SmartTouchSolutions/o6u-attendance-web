@@ -4,10 +4,13 @@
 
     <div class="title3">
         <div class="row" style="margin:0;">
-            <div class="col-md-5 my-2">
+            <div class="col-md-10 my-2">
                 <button type="button" id="sidebarCollapse" class="btn stf">
                     <i class="fas fa-user-tie"></i> Edit Student
                 </button>
+            </div>
+            <div class="col-md- my-2">
+                <a href="{{ url('student')}}" class="btn btn-dark"><i class="fas fa-arrow-left"></i>Back</a>
             </div>
         </div>
     </div>
