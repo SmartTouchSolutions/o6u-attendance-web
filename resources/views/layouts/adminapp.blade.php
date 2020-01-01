@@ -84,6 +84,10 @@
                     Subjects
                 </a>
             </li>
+            <li> 
+                <a href="{{route('logout')}}">
+                <i class="fas fa-sign-out-alt"></i> Logout</li>
+                </a>
         </ul>
     </nav>
     @endif

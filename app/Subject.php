@@ -9,7 +9,7 @@ class Subject extends Model
     protected $guarded = [];
 
     public function subjectUser() {
-        return $this->hasOne('App\Subect_User');
+        return $this->hasOne('App\Subject_User');
     }
 }
 

@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3a41647-a55f-407f-ba7e-03c6fc61ac1a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Attendance.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Attendance.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AttendanceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AttendanceController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/StudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/StudentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Student.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Student.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Subject.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Subject.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Subject_Student.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Subject_Student.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/doctor/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/doctor/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/doctor/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/doctor/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/students/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/students/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/students/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/students/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/students/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/students/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/subjects/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/subjects/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/subjects/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/subjects/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/teacher/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/teacher/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/teacher/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/teacher/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,9 +13,6 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution>
-      <executable />
-    </execution>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -128,6 +110,25 @@
     <option name="height" value="688" />
   </component>
   <component name="ProjectId" id="1VT4Q2Rd6Y1OyqJK3EVfSIaBELx" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="october" type="b2602c69:ProjectViewProjectNode" />
+              <item name="october" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -168,8 +169,36 @@
       <workItem from="1577361809185" duration="4883000" />
       <workItem from="1577605861683" duration="18079000" />
       <workItem from="1577705404505" duration="52574000" />
+      <workItem from="1577869741181" duration="658000" />
     </task>
     <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="658000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <layout>
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24962178" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -180,6 +209,12 @@
         <entry key="1">
           <value>
             <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="range">
@@ -198,12 +233,27 @@
                   </entry>
                 </map>
               </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
             </State>
           </value>
         </entry>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -212,6 +262,20 @@
       <set>
         <option value="1" />
       </set>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
     </option>
   </component>
 </project>

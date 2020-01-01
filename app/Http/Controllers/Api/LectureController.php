@@ -117,11 +117,11 @@ class LectureController extends Controller
 
                 if(count($allLectures) > 0) {
                     $response['success'] = true;
-                    $response['message'] = $allLectures;
+                    $response['data'] = $allLectures;
                     return response()->json($response, 200);
                 } else {
-                    $response['success'] = false;
-                    $response['error'] = 'This Subject Has Not Any Lectures Yet';
+                    $response['success'] = true;
+                    $response['data'] = [];
                     return response()->json($response, 200);
                 }
 

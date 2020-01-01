@@ -39,7 +39,7 @@ class AuthController extends Controller
             $token = $api_token;
             $user = ['id' =>$userID,'name' => $name , 'username' => $username , 'email' =>$email , 'type' =>$type , 'Authorization' => $token];
             $response['success']    = true;
-            $response['data']       = $user;
+            $response['data'] 		  = $user;
             return response()->json($response, 200);
 
         } else{

@@ -31,7 +31,7 @@ Route::get('student/attendance' , 'Student\AttendanceController@attendance');
 });
 
 
-// Route::group(['middleware' => 'SuperAdmin'], function() {
+Route::group(['middleware' => 'SuperAdmin'], function() {
 Route::get('dashboard', 'Admin\DashboardController@dashboard')->name('index');
 
 // Start Doctor
@@ -43,12 +43,13 @@ Route::resource('TeacherAssistant', 'Admin\TeacherAssistantController');
 
 // Start Student
 Route::resource('student', 'Admin\StudentController');
+Route::get('admin/students/attendance/{id}', 'Admin\StudentController@showAttendance');
 // End Student
 
 // Start Student
 Route::resource('subject', 'Admin\SubjectController');
 // End Student
-// });
+});
 
 // Start SuperAdmin Logout
 Route::get('logout', 'AuthController@logout')->name('logout');
