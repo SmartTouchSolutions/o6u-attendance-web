@@ -17,7 +17,7 @@ class CreateSubjectUsersTable extends Migration
             $table->mediumIncrements('id');
             $table->string('users_id');
             $table->mediumInteger('subject_id')->unsigned();
-            $table->string('term');
+            $table->string('term')->nullable();
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
 
             $table->timestamps();
